@@ -17,29 +17,29 @@ pipeline {
 		    //  }
 /*_____________________________________________________________________________________________________________*/
 			/* For later runs*/
-		   stage('Stop and Remove old container') {
-		        steps {
+		//    stage('Stop and Remove old container') {
+		//         steps {
 
-                sh '''
-                    sudo docker container stop introcept-frontend-container
-                    sudo docker container rm introcept-frontend-container
-                '''
-		        }
-		   }
+        //         sh '''
+        //             sudo docker container stop introcept-frontend-container
+        //             sudo docker container rm introcept-frontend-container
+        //         '''
+		//         }
+		//    }
 
-		   stage('Remove old image and build new one') {
-		        steps {
-					sh 'sudo docker image rm introcept-frontend:production'
-					sh 'sudo docker build -f Dockerfile.prod -t introcept-frontend:production .'
-		        }
-		   }
+		//    stage('Remove old image and build new one') {
+		//         steps {
+		// 			sh 'sudo docker image rm introcept-frontend:production'
+		// 			sh 'sudo docker build -f Dockerfile.prod -t introcept-frontend:production .'
+		//         }
+		//    }
 /*_____________________________________________________________________________________________________________*/
 
 
 
 		   stage('Run Image') {
 		        steps {
-		        	sh 'sudo docker run -itd --name introcept-frontend-container -p 80:3000 introcept-frontend:production'	
+		        	sh 'sudo docker run -itd --name introcept-frontend-container -p 80:80 introcept-frontend:production'	
 		        }
 		   }
 		   stage('Testing'){
