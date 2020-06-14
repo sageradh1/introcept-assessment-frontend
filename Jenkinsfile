@@ -10,29 +10,29 @@ pipeline {
 	   		}
 /*____________________________________________________________________________________________________________*/
 		/* For first run there is no need to remove old images and container */
-		    stage('Build first image') {
-		          steps {
-		          	sh 'sudo docker build -f Dockerfile.prod -t introcept-frontend:production .'
-		          }
-		     }
+		    // stage('Build first image') {
+		    //       steps {
+		    //       	sh 'sudo docker build -f Dockerfile.prod -t introcept-frontend:production .'
+		    //       }
+		    //  }
 /*_____________________________________________________________________________________________________________*/
 			/* For later runs*/
-		//    stage('Stop and Remove old container') {
-		//         steps {
+		   stage('Stop and Remove old container') {
+		        steps {
 
-        //         sh '''
-        //             sudo docker container stop introcept-frontend-container
-        //             sudo docker container rm introcept-frontend-container
-        //         '''
-		//         }
-		//    }
+                sh '''
+                    sudo docker container stop introcept-frontend-container
+                    sudo docker container rm introcept-frontend-container
+                '''
+		        }
+		   }
 
-		//    stage('Remove old image and build new one') {
-		//         steps {
-		// 			sh 'sudo docker image rm introcept-frontend:production'
-		// 			sh 'sudo docker build -f Dockerfile.prod -t introcept-frontend:production .'
-		//         }
-		//    }
+		   stage('Remove old image and build new one') {
+		        steps {
+					sh 'sudo docker image rm introcept-frontend:production'
+					sh 'sudo docker build -f Dockerfile.prod -t introcept-frontend:production .'
+		        }
+		   }
 /*_____________________________________________________________________________________________________________*/
 
 
